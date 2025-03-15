@@ -1,0 +1,31 @@
+
+<!-- Updated Dashboard -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Dashboard</h2>
+        
+        {% if role == 'teacher' %}
+            <a href="{{ url_for('generate_qr') }}" class="btn">Generate QR Code for Student</a>
+            <a href="{{ url_for('export_attendance') }}" class="btn">Export Attendance to Excel</a>
+            <a href="{{ url_for('add_student') }}" class="btn">Add Student</a>
+            <a href="{{ url_for('attendance_analytics') }}" class="btn">View Attendance Analytics</a>
+
+        {% endif %}
+        
+        {% if role == 'student' %}
+            <a href="{{ url_for('scan_qr') }}" class="btn">Scan QR Code</a>
+        {% endif %}
+        
+        <a href="{{ url_for('view_attendance') }}" class="btn">View Attendance</a>
+        <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Attendance Analytics</h1>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% if chart_path %}
+            <div class="chart-container">
+                <img src="{{ chart_path }}" alt="Attendance Chart">
+            </div>
+        {% else %}
+            <p>No attendance data available. Please try again later.</p>
+        {% endif %}
+
+        <div class="actions">
+            <a href="{{ url_for('dashboard') }}" class="btn">Back to Dashboard</a>
+            <a href="{{ url_for('generate_qr') }}" class="btn">Generate QR</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
